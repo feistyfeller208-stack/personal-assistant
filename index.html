@@ -4,14 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Personal Assistant</title>
-    <!-- Use absolute paths with repo name -->
+    <!-- Use absolute path with your repo name -->
     <link rel="stylesheet" href="/personal-assistant/www/css/style.css">
-    <style>
-        /* Fallback styles in case CSS doesn't load */
-        body { font-family: Arial; padding: 20px; background: #f0f0f0; }
-        .app { max-width: 600px; margin: 0 auto; }
-        header { background: white; padding: 20px; border-radius: 10px; }
-    </style>
 </head>
 <body>
     <div class="app">
@@ -19,38 +13,28 @@
             <h1>Personal Assistant</h1>
             <div class="status" id="status">Loading...</div>
         </header>
-        
-        <main>
-            <div class="search-section">
-                <input type="text" id="searchInput" placeholder="Search files...">
-                <button id="searchButton">Search</button>
-            </div>
-            
-            <div class="results" id="results">
-                <p>If you can see this text, the HTML is loading!</p>
-            </div>
-        </main>
+        <div class="results" id="results">
+            <p>Loading...</p>
+        </div>
     </div>
-
-    <!-- Use absolute paths for scripts too -->
+    
+    <!-- Absolute path for JS -->
     <script src="/personal-assistant/www/js/app.js"></script>
     
     <script>
-        // Fallback init
-        console.log('Index.html loaded');
-        document.getElementById('status').textContent = 'HTML Loaded';
+        // Debug
+        console.log('Index loaded');
         
         // Check if app.js loaded
-        window.addEventListener('load', function() {
-            if (typeof PersonalAssistant === 'undefined') {
-                document.getElementById('results').innerHTML += 
-                    '<p style="color:red">⚠️ app.js failed to load. Check path: /personal-assistant/www/js/app.js</p>';
-            } else {
-                document.getElementById('results').innerHTML += 
-                    '<p style="color:green">✅ app.js loaded successfully!</p>';
+        window.onload = function() {
+            if (typeof PersonalAssistant !== 'undefined') {
+                document.getElementById('results').innerHTML = '<p style="color:green">✓ app.js loaded!</p>';
                 PersonalAssistant.init();
+            } else {
+                document.getElementById('results').innerHTML = 
+                    '<p style="color:red">✗ app.js not loaded. Path: /personal-assistant/www/js/app.js</p>';
             }
-        });
+        };
     </script>
 </body>
 </html>
